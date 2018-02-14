@@ -1,0 +1,47 @@
+nadav.vitri
+avichail
+
+itayexp
+yochai
+
+=============================
+=      File description     =
+=============================
+Packeges:
+1) execeptions:
+    * Type1Exceptions - handles exceptions that can be found in the commandfile. Prints a special warning message
+        with the line where the warning showed. Handles all the error under the description "Type 1 Errors" in the PDF.
+    * Type2Exceptions - handles exceptions that can be found in the commandfile or in the program argument line.
+        Prints a special error message with an informative message. Handles all the error under the description
+        "Type 2 Errors" in the PDF.
+2) filesprocessing -
+    * DirectoryProcessor - The main class. Receives a source directory and a command file, with commands related to the
+        files in the source directory. Operates the commands on the directory.
+3) filters - Filter class (which represents the default filter - "all"), and another 10 sud-class of filters that
+             inherit from Filter class. More detailed explanation about each class can be found in every class's
+             description.
+4) orders - Order - receives a files array and an order command. Creates a new object such that it main field is
+                    a files array ordered in the requested way.
+=============================
+=          Design           =
+=============================
+We've decided to implement all the filters and orders by using a factory method. The "filter factory" produces
+a new filter object, as specified in the command file. The "order factory" is located in the Order class, as it
+constructor, and decide which method in the class will be called.
+
+In addition, We wanted our program to keep the encapsulation principle so We divided the program into 4 packages
+while maintaining that each package will be able to operate the same by maybe using similar packages to the ones
+ we wrote (and that is because we tried to minimize the "public" and so methods and fields).
+=============================
+=    Modularity details     =
+=============================
+As mentioned above, We've created 4 packages. The reason for that is that We wanted each "part" of the exercise
+to be in charge of It own roll. It did helped as a lot when debugging, but even before that, it helped as
+explain to ourselves how the program should look.
+Furthermore, in "filters" package We've used the inherit principle to avoid to redundant code.
+=============================
+=     Changes from UML      =
+=============================
+We implemented the same structure as shown in our UML. Yes, We've made some small changes that are not shown there
+(for example: adding some more "help" methods in Order class or changing the type some of the methods variables)
+but the main structure stayed.

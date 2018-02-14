@@ -1,0 +1,23 @@
+nadav.vitri
+
+#File Description
+Board.java - The Board class represents a board of the Nim game.
+Competition.java - The Competition class represents a Nim competition between two players, consisting
+of a given number of rounds.
+Move.java - The Move class represents a move in the Nim game by a player.
+Player.java - The Player class represents a player in the Nim game, producing Moves as a response to
+a Board state.
+
+#Design
+Each class contain the method's and the characterises.
+the Human player has some different. The "strings" we need to print to the user are in the competition class,
+but if the user make a illegal move or unsupported key we handle this in the Player class.
+
+#Implementation Issues
+Smart player - there are many ways to implement the smart player. I choose to check every turn the numbers
+of the unmarked sticks at the board. if this number is even the smart player mark only one (to put his
+opponent with one stick and lose the game!). if this number is odd from the same reason the smart player
+mark  sticks.
+there is also option that the number of the unmarked stick is odd but we can't mark 2 sticks (for example
+only one stick unmarked in every row) and in this situation the smart player lose the game and i implement
+this that the smart player chose a random move.

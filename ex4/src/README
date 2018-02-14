@@ -1,0 +1,46 @@
+nadav.vitri
+
+=====================================
+#File Description
+=====================================
+BinaryTree.java - abstract class the implement iterable. a simple basic binary tree with add,contain,delete,
+size and iterator.
+AvlTree.java - class that extend BinaryTree class. this class represent avl tree - all the basic operations
+and method like a binary tree but with some other methods like balance and updateHeight to keep the
+properties of avl tree.
+MyNode.java - this class represent a simple node with two null sons and self height. also in this class there
+are many "gets" and "sets" methods to work with the node object.
+
+=====================================
+#Design
+=====================================
+First I make MyNode class that represent a node with data, height, left and right node. the trees I will make
+take objects from this class. I tried to keep think private to preserve the encapsulation idea by make a gets
+and sets method. also, i think that maybe it's maybe not "looking good" when I set for example node but i
+think encapsulation much important and gets and sets can really make things look simple.
+The BinaryTree is the basic class for all kinds of trees so I make the avl class to extend her. I think this
+is a really good think of design because every kind of trees have a big common with simple binary tree and
+if I or someone who use my code can implement very easily other kind of trees if this will be necessary.
+The Avl tree has to keep the properties of avl tree so i make methods inside this class that keep things ok
+like balance and the update height for nodes (things that not necessary for other trees).
+In all this program I tried to keep things simple and make the code modular to easy work or change.
+* after my UML diagram i found it more simple in my way - for example i figured up that i don't need to keep
+pointer for parent of node.
+
+=====================================
+#Implementation Issues
+=====================================
+* Balance of nodes - first i tried to determine if there is need to balance by BalanceFactor - a recursive
+function that calculate the difference between subtrees, but it's cause me problems so i decided to keep
+height for every node and then determine if we need to balance.
+In addition I make the add and the delete operations by recursive function with helper function.
+
+=====================================
+# Answers
+=====================================
+1. the number in this order: [5,3,8,2,4,7,10,1,6,9,11,12] will give the answer.
+2. The asymptotic run time for the constructor AvlTree(int[] data) - evert time we call to add function is
+O(n*log n) for array with number of n nodes.
+3. The asymptotic run time for constructor AvlTree(AvlTree avltree) is the same O(n*log n) - we run over in
+for loop on all nodes (in the copied avltree) and the time for creat a itaretor took O(n) so in the end
+we get O(n*log n)

@@ -1,0 +1,35 @@
+nadav.vitri
+
+#File Description
+SimpleHashSet.java - The basic class for hash sets. an abstract class implementing SimpleSet.
+OpenHashSet.java - class that represent the open hash set (each cell in the hash table is a reference
+to a MyLinkedList).
+ClosedHashSet.java - class that represent the close hash set (each cell in the hash table is a reference
+to a String).
+CollectionFacadeSet.java - Wraps an underlying Collection.
+MyLinkedList.java - Define a wrapper-class that has-a LinkedList.
+SimpleSetPerformanceAnalyzer.java - This class has a main method that measures and compare the run-times and
+performance of many types of collection.
+
+#Design
+In my point of view there is a basic methods that basic to all of kind of hash set - the add, remove, contain
+and rehashing common to any kind of hash set, but there implementation are different (cause every hash has a
+different type of object's in cells and each acr differently when there is a collision). so I decided to
+make SimpleHashSet abstract (that implement SimpleSet) so the common method's of his "sons" (Open and Closed
+hash set) will be abstract and implement differently in each hash set.
+
+#Implementation Issues
+* OpenHashSet - first I build a class of MyLinkedList and insert to every cell object from her.
+Obliviously I used the simple method contain to check if value in or not in the set and then add or remove
+the value from the set. In addition, before the operations delete and add I first check if rehashing is
+necessary. I write a function rehashing the get a param of int that tell me if I need to increas or decrease
+the hash table - in my opinion it's simplify to increase or decrease in the same function just by getting
+"flag" the represent what we need to do.
+* ClosedHashSet - the main "problem" of this class is deletion - I find more easily and more efficient to
+ delete by insert empty string there. In that i cand find value just by runnig over the set until I get null.
+ (if I just insert in a null there can be a problem when we add and remove some value and there trying to add
+ it's again after we change the capacity of the table..).
+
+# BONUS
+
+# The results of the analysis

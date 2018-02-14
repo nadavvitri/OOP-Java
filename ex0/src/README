@@ -1,0 +1,16 @@
+nadav.vitri
+
+#File Description
+KnessetMember.java - contain the Knesset member class.
+Law.java - contain the Law class.
+Assembly.java - contain the Assembly class.
+
+
+#Design
+Each class contain the method's and the characterises of law/knesset member/assembly.
+In Assembly class i create also array of laws per knesset member (that represent the number of laws the
+MK support), and then i can check if MK can support laws or he reach the max number of laws he can support.
+
+#Implementation Issues
+lawsPerKnessetMember in Assembly class - there many ways to check if MK reach the max number of laws he can
+support. I think that create array parallel to the knesset member is the simple way.

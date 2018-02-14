@@ -1,0 +1,33 @@
+nadav.vitri
+
+#File Description
+Spaceship.java - The basic class for SpaceShips.
+SpaceShipFactory.java - Create all the spaceship objects according to the command line arguments.
+Human.java - The Human SpaceShip class.
+Basher.java - The Basher SpaceShip class.
+Aggressive.java - The Aggressive SpaceShip class.
+Runner.java - The Runner SpaceShip class.
+Drunkard.java - The Drunkard SpaceShip class.
+Special.java - The Special SpaceShip class.
+
+#Design
+The basic class for basic Space Ship represent in SpaceShip class. I use the abstract class and super method.
+In my design of the program there is things that basic for every ship buy there some changes between them -
+like the image represent the ship. The basic methods that need to be implement in little difference between
+each ships wrote like abstract method - the doAction, and the getImage, and the constructor of ship.
+In specific SpaceShip I use the super in the constructor and if necessary i add some other features (like
+counter for trying teleport and so on). In the same way I add some changes in the doAction and getImage.
+In my opinion this is more readable and easy to understand, and these method really common to all SpaceShips.
+In addition I try to simplify the code by writing function in the SpaceShip class that used several times in
+other space ship classes - like the ChargingEnergy that we need to charge every round, and the
+distanceFromCloseShip method that calculate the distance between close space ship and the angleFromCloseShip
+that calculate the angle to the close space ship. This save "lines of code" and prevent recycling of the same
+code.
+
+#Implementation Issues
+Drunkard space ship - I decided to implement the drunken pilot like a really pilot that drink to much, and
+act in different behave by randomly. for that I use the random (boolean and int for move).
+every 20 rounds the pilot try to teleport, every 10 rounds the pilot try to fire and every 5 rounds the
+pilot try to put shield on.
+Special space ship - I decided to implement the special pilot to act like a "leech" but for fun every 100
+rounds he randomly try to teleport (by using random boolean that several times he will teleport)

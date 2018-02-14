@@ -1,0 +1,147 @@
+nadav.vitri
+
+=====================================
+#File Description
+=====================================
+SimpleHashSet.java - The basic class for hash sets. an abstract class implementing SimpleSet.
+OpenHashSet.java - class that represent the open hash set (each cell in the hash table is a reference
+to a MyLinkedList).
+ClosedHashSet.java - class that represent the close hash set (each cell in the hash table is a reference
+to a String).
+CollectionFacadeSet.java - Wraps an underlying Collection.
+MyLinkedList.java - Define a wrapper-class that has-a LinkedList.
+SimpleSetPerformanceAnalyzer.java - This class has a main method that measures and compare the run-times and
+performance of many types of collection.
+
+=====================================
+#Design
+=====================================
+In my point of view there is a basic methods that basic to all of kind of hash set - the add, remove, contain
+and rehashing common to any kind of hash set, but there implementation are different (cause every hash has a
+different type of object's in cells and each acr differently when there is a collision). so I decided to
+make SimpleHashSet abstract (that implement SimpleSet) so the common method's of his "sons" (Open and Closed
+hash set) will be abstract and implement differently in each hash set.
+
+=====================================
+#Implementation Issues
+=====================================
+* OpenHashSet - first I build a class of MyLinkedList and insert to every cell object from her.
+Obliviously I used the simple method contain to check if value in or not in the set and then add or remove
+the value from the set. In addition, before the operations delete and add I first check if rehashing is
+necessary. I write a function rehashing the get a param of int that tell me if I need to increas or decrease
+the hash table - in my opinion it's simplify to increase or decrease in the same function just by getting
+"flag" the represent what we need to do.
+
+* ClosedHashSet - the main "problem" of this class is deletion - I find more easily and more efficient to
+delete by insert empty string there. In that i can find value just by running over the set until I get null.
+(if I just insert in a null there can be a problem when we add and remove some value and there trying to add
+it's again after we change the capacity of the table..).
+(actually I changed all my class cause you said after we can't use empty string and that cause me a really
+mess. I in the end create a parallel array and find a complex solution, but i found it's much slower and
+complicated to other who use my code)
+
+
+
+=====================================
+# The results of the analysis
+=====================================
+------- Time take for Initializing data1.txt -------
+#These values correspond to the time it takes (in ms) to insert data1 to all data structures
+OpenHashSet = 62459.0
+ClosedHashSet = 303097.0
+TreeSet = 43.0  * fastest
+LinkedList = 27042.0
+HashSet = 43.0 * fastest
+
+------- Time take for Initializing data2.txt -------
+#These values correspond to the time it takes (in ms) to insert data2 to all data structures
+OpenHashSet = 40.0
+ClosedHashSet = 22.0
+TreeSet = 39.0
+LinkedList = 14815.0
+HashSet = 4.0  * fastest
+
+------- comparision between initializing data1.txt and data2.txt -------
+OpenHashSet: data2 faster.
+ClosedHash Set: data1 faster.
+TreeSet: data2 faster.
+LinkedList: data2 faster.
+HashSet:  data2 faster.
+
+------- Time take for contain "hi" in data structure after data1.txt initialized-------
+OpenHashSet = 31.0
+ClosedHashSet = 17.0
+TreeSet = 72.0
+LinkedList = 683374.0
+HashSet = 11.0 * fastest
+
+------- Time take for contain "-13170890158" in data structure after data1.txt initialized-------
+OpenHashSet = 479130.0
+ClosedHashSet = 1770464.0
+TreeSet = 144.0
+LinkedList = 546840.0
+HashSet = 22.0  * fastest
+
+------- data structure initialized with data1.txt, compare the time it took for the query
+contains (“hi”) as opposed to “-13170890158” -------
+OpenHashSet = 31.0 || 479130.0
+ClosedHashSet = 17.0 || 1770464.0
+TreeSet = 72.0  ||  144.0
+LinkedList = 683374.0  || 546840.0
+HashSet = 11.0  || 22.0
+
+------- Time take for contain "hi" in data structure after data2.txt initialized-------
+OpenHashSet = 5.0 * fastest
+ClosedHashSet = 26.0
+TreeSet = 68.0
+LinkedList = 579123.0
+HashSet = 9.0
+
+------- Time take for contain "23" in data structure after data2.txt initialized-------
+OpenHashSet = 19.0 * fastest
+ClosedHashSet = 32.0
+TreeSet = 41.0
+LinkedList = 52509.0
+HashSet = 24.0
+
+------- data structure initialized with data1.txt, compare the time it took for the query
+contains (“hi”) as opposed to “23” -------
+OpenHashSet = 5.0 || 19.0
+ClosedHashSet = 26.0  ||  32.0
+TreeSet = 68.0 || 41.0
+LinkedList = 579123.0  ||  52509.0
+HashSet = 9.0  || 24.0
+
+=====================================
+# Q & A
+=====================================
+1. Bad Results: the bad result for data1 for the OpenHashSet is for contain "-13170890158" and this is also
+the bad result for ClosedHashSet.
+
+2. Strengths and Weaknesses:
+OpenHashSet and CloseHashSet - Strengths is to check if a "small string" (I mean small query) contain in the
+set. the Weaknesses is for checking if the set contain a long word.
+TreeSet and LinkedList - Strengths is for adding a big data, the Weaknesses is for checking if a long word
+contain in the set.
+HashSet - Strengths is for adding a big data, Weaknesses is for checking if a long word contain in the set.
+I think that we can see the Hashset is better in my program to for finding some string and for adding a
+big array of data to set.
+
+3. Compare between the HashSets:
+As we cane see from the result' the OpenHashSet more efficient when we have
+many strings that has the same hashcode(go to the same bucket), but the CloseHashSet more efficient when the
+hashcode of the strings is different.
+
+4. Compare to the Java HashSet:
+As we can see from the results the Built-in Hash set perform better in adding
+data and also when ew check if some string (long or short) contain in the Hash. Especially I see the
+different in the operation contain of the "-13170890158" that the Java Hash Set is very fast.
+
+5. Surprised and expect:
+I was very surprised how fast is the operation of contain of "hi" in OpenHashSet and
+in the ClosedHashSet. I was really surprised to see the amazingly difference between Java HashSet and the
+Open and Closed hash set I build. I exepct that contain opertion in LinkedList will take time cause we know
+what it's to find a value in LinkedList.
+
+6. the performance of Java Hash set in initilizng data1 were really faster! I tried google and i didn't find
+a answer. I guess it's some how has a thing with the hashes codes...

@@ -1,0 +1,82 @@
+nadav.vitri
+avichail
+
+=============================
+=      File description     =
+=============================
+Packages:
+1) Main - the main package: contain ProgramTree (and also the inner class of him), Regex and Sjava.
+    i) Sjava - Contain the main method of the program. In this class we convert the file to string array and
+    send it to ProgramTree to run the program. In the main method we catch the IOException and syntax
+    exception of the sjava file we check.
+    ii) ProgramTree - read the code line by line and represent the sjava file like a tree where every scope
+    (In inner classes - ConditionScope, MethodScope and Scope) is a node that hold all the data.
+    iii) Regex - Has the constant patterns for checking the code line. We use them in the ProgramTree when
+    we check sjava lines.
+2) Variable - has the Variable class that represent every variable in the code with his data and
+    characterises. We make cleat there if a variable assignment or declaration is correct.
+5) TextException - has the TextException who represent the exception occurs by syntax error in the sjava
+    file and return a simple informative message.
+
+=============================
+=          Design           =
+=============================
+We first think to design the program like a stack that we handle the current scope and then throw it, but we
+want to keep every scope (also the scope we throw!) to check global variable for exmeple, so at end We've
+decided to implement the sjava checking code by represent the code like a tree where every node is a
+new scope who has all his data like inside variable, parameters and his inside scopes (nodes) like condition
+or method scopes.
+first we check all the lines to recognize a global variable and method and after that check the rest of the
+code. In that way we can assure that every call inside scope or call for global method or global
+variables that we not reach them (if we read the sjava line by line) is correct or not.
+For every line we check the last char (not the empty spaces) to determine the kind of the line - call for
+method, open new scope. we also check every line if there is a error (like \* Some comment \* ) or it's
+a "boring line" that we can ignore and it's not error.
+Every line we check by regex and split by different delimiters  - if we found some error in the line we throw
+exception and return 1 (code is illegal). else, we create new object that need to be create - like new scope
+or new variable, and we can recognize again error in the code by checking the variable value for example.
+In addition every scope has array that represent his variable that we can check easly if the the variable
+assignment is OK or not.
+In our point of view the lines of a code is simply like a tree that and we actually readable and intuitive
+idea. Also every kind of scope is a node so we determine to represent them like inner scopes of ProgramTree
+just like a regular nodes, and in that way we also keep the encapsulation idea.
+All the variable represent different package because we think that variable is not "big part" of the tree and
+his job is to keep the details of variable and do some check for them.
+We wrote also many method for checking the code lines in ProgramTree. these methods maybe add some
+"code lines" but they are necessary for a good check of the line (also for our test that not include in
+the online test..).
+We try to handle error with throwing exception when we found error. In that way every time we found error in
+with throw the error up in we know that we catch the exception and print the necessary thing without handle
+every error with true or false (like we learn, in that way we solve big problem with only simple one - we
+throw the error up).
+
+=============================
+=    Answers for Questions     =
+=============================
+- In oue code it's very simple to add new variable type (like float), we just need to add new regex in our
+Variable class and to add in the checkValue method the value that assigned to variable (if assigned).
+- Classes - if we want to add the feature to classes in sjava code lines we need to look like very class
+ is a root of his tree. First we need to do the firstCheck to every class and then keep on the regular
+ program (by adding some new regex like Class and so on) so in that way every class has all the scopes and
+ data inside her.
+- Other type for methods - if we want to add the feature to other methods type in sjava code lines we need
+first to add new regex the identifier "int" for exemple (like the regex for void in our program).
+then we need to make method that check if the method return value compare to his type.
+then we need also to make method that check every call to the method is compare to the value the method
+return - for example check if the variable who hold the value the method return is the same type of return
+value, or if we call to the value in "if" condotion if he compare to if (if the method return boolean etc).
+
+Regular Expressions:
+1. VARIABLE_ASSIGNMENT - we use this regex to recognize every variable assignment line, wether it is a new
+variable or reassignment of old one. We make this regex that we cane group the name and the value and in that
+way it is become easier to create new variable.
+
+2. VALUE - this regex recognize every valid value that compare to the rules. this regex recognize also int,
+double, boolean, String and char values.
+============================
+=     Changes from UML      =
+=============================
+In general the structure of the program in the UML is same like the program.
+We found during the work that we need to check many regex for determine if a line is a error  so we create
+class that hold all the pattern needed to check. Also we found we need to check things we don't found before
+like check if the value is the same like the type of a variable.
